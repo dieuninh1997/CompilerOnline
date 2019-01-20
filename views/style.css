@@ -16,6 +16,7 @@
     width: 65%;
     float: left;
     min-height: 635px;
+    height: 100%;
     background: grey;
 }
 
@@ -48,18 +49,17 @@
 
 .compileRun textarea{
     height: 148px;
-    padding: 2px 2px 2px -2px;
+    margin: 2px 2px 2px 1px;
+    padding: 5px;
     width: 100%;
     border: 1px solid grey;
+    resize: none;
 }
 
 .compileRun button{
-  
     width: 100%;
     color: white;
-    height: 2rem;
     font-weight: bold;
-    background-color: #21cc1c;
 }
 
 .compileRun div {
@@ -70,7 +70,7 @@
 }
 
 .output{
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .output textarea {
