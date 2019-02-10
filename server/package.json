@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "*"
+    "express-es6-template-engine": "*",
+    "babel-polyfill": "*",
+    "express": "*",
+    "hackerearth-node": "^2.3.9"
   }
 }
