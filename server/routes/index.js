@@ -83,7 +83,7 @@ router.post('/compile', function(req, res, next){
 
     hackerEarth.compile(config).then(result => {
        // res.send(JSON.stringify(result));
-        console.log(result);
+        console.log('result');
         res.json(result);
 
     }).catch(err => {
@@ -93,8 +93,8 @@ router.post('/compile', function(req, res, next){
 
 
 router.get('/changelang/:langCode/:language', function(req, res, next){
-    var language = res.params.language.trim();
-    var langCode = res.params.langCode.trim();
+    var language = req.params.language;
+    var langCode = req.params.langCode;
     res.render('index', {
         language: language,
         langCode: langCode

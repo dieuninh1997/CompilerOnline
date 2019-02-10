@@ -1,4 +1,5 @@
 function changeLanguage(){
+    console.log('here')
     var language = document.getElementById('languageOption selector').value;
     var langCode;
     switch(language){

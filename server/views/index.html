@@ -14,7 +14,7 @@
         </div>
         <div class="control">
             <div class="languageOption">
-                <select onchange="changeLanguage()" name="lang" required>
+                <select id="languageSelector" onchange="changeLanguage(this)" name="lang" required>
                     <option value="1">C</option>
                     <option value="2">C++</option> 
                     <option value="3">C#</option>
@@ -31,12 +31,12 @@
                 <div id="dvInput" style="display: none">
                         <textarea placeholder="Provide your input here each seperated by a new line."></textarea>
                 </div>
-                <button class="btn btn-danger">COMPILE & RUN</button>
+                <button id="compilerButton" class="btn btn-danger">COMPILE & RUN</button>
                 <!-- <button class="compilerButton">COMPILE & RUN</button> -->
             </div>
 
             <div class="compileRun output">
-                <div>
+                <div class="runRespone">
                     <textarea></textarea>
                 </div>
                 <button class="btn btn-primary" disabled="disabled">YOUR OUTPUT</button>
@@ -53,7 +53,7 @@
     <script>
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/html");
+        editor.session.setMode("ace/mode/#{langCode}");
         editor.setFontSize(16);
     </script>
 
@@ -64,6 +64,35 @@
             dvInput.style.display = chkInput.checked ? "block" : "none";
         }
 
+        function changeLanguage() {
+            var language=document.getElementById('languageSelector').value;
+            var langCode;
+            switch(language){
+                case "1":
+                    langCode="C";
+                    break;
+                case "2":
+                    langCode="CPP";
+                    break;
+                case "3":
+                    langCode="CSHARP";
+                    break;
+                case "4":
+                    langCode="JAVA";
+                    break;
+                case "5":
+                    langCode="JAVASCRIPT";
+                    break;
+                case "6":
+                    langCode="PYTHON";
+                    break;
+            } 
+            var lang = {
+                langCode: langCode
+            }
+            console.log(lang);
+            window.location.href='/changelang/'+langCode+"/"+language;
+        }
     </script>
 </body>
 </html>

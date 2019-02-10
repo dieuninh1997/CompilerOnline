@@ -7,30 +7,19 @@ var index = require('./routes/index');
 
 
 app.set('port', process.env.PORT || 3000);
-// server.listen(3000);
+
 app.engine('html', es6Renderer);
 app.use(express.static(path.join(__dirname + './views')));
-// app.set('views', './views'); // general config
 app.set('view engine', 'html');
-
-
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get("/", function(req, res){
-//     // res.send("<font color=red>Hello world</font>");
-//     res.sendFile(__dirname + "/views/demo.html");
- 
-// })
-
 app.use('/',index);
 
-// catch err 404 and forward to error handler
-app.use(function(req, res, next) {
-    var error = new Error('Eror 404: Not found '+req.originalUrl);
-    error.status = 404;
-    next(error);
-});
+// ham nay de handle nhung thuoc tinh bat buoc co trong trong request, vi du nhu token trong header, cookie,.v.v.v.
+ app.use(function(req, res, next) {
+   next();
+ });
 
 //error handler
 app.use(function(error, req, res, next){
