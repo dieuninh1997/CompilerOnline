@@ -78,19 +78,31 @@ router.post('/compile', function (req, res, next) {
 
 // home page
 router.get('/', function (req, res, next) {
-  res.render('index', {
+  res.render('index.html', {
     language: '1',
     langCode: 'C'
   })
 })
 
 router.get('/changelang/:langCode/:language', function (req, res, next) {
-  let language = req.params.language
-  let langCode = req.params.langCode
-  res.render('index', {
-    language: language,
-    langCode: langCode
-  })
+  try {
+    const { language, langCode } = req.params
+    const listLanguague = [
+      { language: '1', langCode: 'C' },
+      { language: '2', langCode: 'CPP' },
+      { language: '3', langCode: 'CSHARP' },
+      { language: '4', langCode: 'JAVA' },
+      { language: '5', langCode: 'JAVASCRIPT' },
+      { language: '6', langCode: 'PYTHON' }
+    ]
+    res.render('index.html', {
+      language,
+      langCode,
+      listLanguague
+    })
+  } catch (error) {
+
+  }
 })
 
 router.post('/', function (req, res, next) {

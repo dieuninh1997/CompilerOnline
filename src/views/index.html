@@ -17,12 +17,13 @@
     <div class="control">
       <div class="languageOption">
         <select id="languageSelector" onchange="changeLanguage(this)" name="lang" required>
-          <option value="1">C</option>
-          <option value="2">C++</option>
-          <option value="3">C#</option>
-          <option value="4">Java</option>
-          <option value="5">Javascript</option>
-          <option value="6">Python</option>
+          {% for item in listLanguague %}
+            <option value="{{item.language}}" 
+              {% if (item.language == language) %}
+                selected
+              {% endif %}
+            >{{item.langCode}}</option>
+          {% endfor %}
         </select>
       </div>
       <div class="compileRun">
@@ -66,15 +67,6 @@
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/#{langCode}");
     editor.setFontSize(16);
-
-    setLanguage();
-
-    function setLanguage() {
-      var href = window.location.href
-      var hrefArr = href.split('/');
-      var languageID = hrefArr[hrefArr.length - 1];
-      $("#languageSelector").val(languageID);
-    }
 
     function showHideDiv(chkInput) {
       var dvInput = document.getElementById("dvInput");

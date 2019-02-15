@@ -1,17 +1,10 @@
 var express = require('express')
 
-var es6Renderer = require('express-es6-template-engine')
-
 var app = express()
 var path = require('path')
 var index = require('./routes')
 
-app.engine('html', es6Renderer)
-app.set('views', path.resolve(__dirname, './views'))
-app.set('view engine', 'html')
-
-app.use(express.static(path.join(__dirname, 'public')))
-
+initViewEngine()
 app.use('/', index)
 
 // ham nay de handle nhung thuoc tinh bat buoc co trong trong request, vi du nhu token trong header, cookie,.v.v.v.
@@ -27,7 +20,17 @@ app.use(function (error, req, res, next) {
 
   // render the error page
   res.status(error.status || 500)
-  res.render('error')
+  res.render('error.html')
 })
 
 module.exports = app
+
+function initViewEngine () {
+  var nunjucks = require('nunjucks')
+  nunjucks.configure(path.resolve(__dirname, './views'), {
+    autoescape: true,
+    express: app
+  })
+  app.set('view engine', 'html')
+  app.use(express.static(path.join(__dirname, 'public')))
+}
