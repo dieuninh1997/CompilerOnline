@@ -12,7 +12,7 @@
 <body>
   <div class="container-fluid">
     <div class="editer">
-      <div id="editor"></div>
+      <div id="editor">{{data}}</div>
     </div>
     <div class="control">
       <div class="languageOption">
@@ -59,13 +59,11 @@
     crossorigin="anonymous"></script>
   <script src="../public/javascripts/compile.js" type="text/javascript"></script>
 
-   
-
   <!-- checkbox show hide input  -->
   <script type="text/javascript">
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/#{langCode}");
+    editor.session.setMode("ace/mode/javascript");
     editor.setFontSize(16);
 
     function showHideDiv(chkInput) {
@@ -99,7 +97,7 @@
       var lang = {
         langCode: langCode
       }
-      window.location.href = '/changelang/' + langCode + "/" + language;
+      window.location.href = '/lang/' + langCode + "/" + language;
     }
   </script>
 </body>

@@ -1,11 +1,13 @@
-var express = require('express')
+const express = require('express')
 
-var app = express()
-var path = require('path')
-var index = require('./routes')
+const app = express()
+const path = require('path')
+const { router, homeRouter, languageRouter } = require('./routes')
 
 initViewEngine()
-app.use('/', index)
+
+app.use('/', homeRouter)
+app.use('/lang', languageRouter)
 
 // ham nay de handle nhung thuoc tinh bat buoc co trong trong request, vi du nhu token trong header, cookie,.v.v.v.
 app.use(function (req, res, next) {
@@ -26,7 +28,7 @@ app.use(function (error, req, res, next) {
 module.exports = app
 
 function initViewEngine () {
-  var nunjucks = require('nunjucks')
+  const nunjucks = require('nunjucks')
   nunjucks.configure(path.resolve(__dirname, './views'), {
     autoescape: true,
     express: app
