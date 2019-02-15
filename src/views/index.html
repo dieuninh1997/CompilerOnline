@@ -58,15 +58,24 @@
     crossorigin="anonymous"></script>
   <script src="../public/javascripts/compile.js" type="text/javascript"></script>
 
-  <script>
+   
+
+  <!-- checkbox show hide input  -->
+  <script type="text/javascript">
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/#{langCode}");
     editor.setFontSize(16);
-  </script>
 
-  <!-- checkbox show hide input  -->
-  <script type="text/javascript">
+    setLanguage();
+
+    function setLanguage() {
+      var href = window.location.href
+      var hrefArr = href.split('/');
+      var languageID = hrefArr[hrefArr.length - 1];
+      $("#languageSelector").val(languageID);
+    }
+
     function showHideDiv(chkInput) {
       var dvInput = document.getElementById("dvInput");
       dvInput.style.display = chkInput.checked ? "block" : "none";
@@ -98,7 +107,6 @@
       var lang = {
         langCode: langCode
       }
-      console.log(lang);
       window.location.href = '/changelang/' + langCode + "/" + language;
     }
   </script>
