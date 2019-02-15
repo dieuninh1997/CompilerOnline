@@ -17,14 +17,6 @@ language    langCode            Time Limit(s)          Memory Limit
     6           PYTHON              5
 */
 
-// home page
-router.get('/', function (req, res, next) {
-  res.render('index', {
-    language: '1',
-    langCode: 'C'
-  })
-})
-
 router.post('/compile', function (req, res, next) {
   let language = req.body.language
   let timeLimit = 1
@@ -78,11 +70,17 @@ router.post('/compile', function (req, res, next) {
   }
 
   hackerEarthNew.compile(config).then(result => {
-    // res.send(JSON.stringify(result));
-    console.log('result')
     res.json(result)
   }).catch(err => {
     throw err
+  })
+})
+
+// home page
+router.get('/', function (req, res, next) {
+  res.render('index', {
+    language: '1',
+    langCode: 'C'
   })
 })
 

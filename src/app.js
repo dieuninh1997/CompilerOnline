@@ -4,10 +4,10 @@ var es6Renderer = require('express-es6-template-engine')
 
 var app = express()
 var path = require('path')
-var index = require('./routes/index')
+var index = require('./routes')
 
 app.engine('html', es6Renderer)
-app.use(express.static(path.resolve(__dirname, './views')))
+app.set('views', path.resolve(__dirname, './views'))
 app.set('view engine', 'html')
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -21,9 +21,6 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (error, req, res, next) {
-  console.log('========================================')
-  console.log('err', error)
-  console.log('========================================')
   // set locals, only providing error in development
   res.locals.message = error.message
   res.locals.error = req.app.get('env') === 'development' ? error : {}
