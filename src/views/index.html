@@ -61,10 +61,11 @@
 
   <!-- checkbox show hide input  -->
   <script type="text/javascript">
-    var editor = ace.edit("editor");
+    let editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/javascript");
     editor.setFontSize(16);
+    editor.session.setMode('ace/mode/javascript') // default mode text
+    editor.getSession().setUseWorker(false); //disable check syntax 
 
     function showHideDiv(chkInput) {
       var dvInput = document.getElementById("dvInput");
