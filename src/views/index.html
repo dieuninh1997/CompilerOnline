@@ -16,7 +16,7 @@
     </div>
     <div class="control">
       <div class="languageOption">
-        <select id="languageSelector" required>
+        <select id="languageSelector" required data-listlanguague={{listLanguague}}>
           {% for item in listLanguague %}
             <option value="{{item.language}}" 
               {% if (item.language == language) %}
@@ -46,8 +46,8 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js" type="text/javascript" charset="utf-8"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -57,9 +57,7 @@ compileRouter.post('/', async function (req, res, next) {
         langCode = 'PYTHON'
         break
       default:
-        timeLimit = 1
         memoryLimit = 262144
-        langCode = ''
         break
     }
     const config = {

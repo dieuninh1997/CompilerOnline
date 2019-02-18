@@ -46,10 +46,13 @@
         case '6':
           langCode = 'PYTHON'
           break
+        default:
+          langCode = 'TEXT'
+          break
       }
 
       reload = true
-      window.location.href = '/lang/' + langCode + '/' + language + '?reload=true'
+      window.location.href = '/lang/' + langCode + '/' + language
     }
 
     function configEditor () {
