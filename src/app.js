@@ -2,10 +2,10 @@ const express = require('express')
 
 const app = express()
 const path = require('path')
-const { router, homeRouter, languageRouter } = require('./routes')
+const { homeRouter, languageRouter } = require('./routes')
 
 initViewEngine()
-
+app.use(express.static(path.resolve(__dirname, './public')))
 app.use('/', homeRouter)
 app.use('/lang', languageRouter)
 
@@ -34,5 +34,4 @@ function initViewEngine () {
     express: app
   })
   app.set('view engine', 'html')
-  app.use(express.static(path.join(__dirname, 'public')))
 }
