@@ -3,6 +3,16 @@
 })(function cbFn ($, window, ace) {
   $(homePageReady)
   function homePageReady () {
+    var language = '1'
+    var langCode = 'C'
+    var reload = false
+    $(window).on('beforeunload', function () {
+      // save info somewhere
+      if (!reload) {
+        window.alert('Hahahaaa')
+        return 'haha'
+      }
+    })
     configEditor()
 
     $('#languageSelector').on('change', changeLanguage)
@@ -16,8 +26,7 @@
     }
 
     function changeLanguage () {
-      var language = document.getElementById('languageSelector').value
-      var langCode
+      language = document.getElementById('languageSelector').value
       switch (language) {
         case '1':
           langCode = 'C'
@@ -38,7 +47,12 @@
           langCode = 'PYTHON'
           break
       }
-      window.location.href = '/lang/' + langCode + '/' + language
+      console.log('========================================')
+      console.log('language', language)
+      console.log('langCode', langCode)
+      console.log('========================================')
+      reload = true
+      window.location.href = '/lang/' + langCode + '/' + language + '?reload=true'
     }
 
     function configEditor () {
