@@ -6,13 +6,13 @@
     var language = '1'
     var langCode = 'C'
     var reload = false
-    $(window).on('beforeunload', function () {
-      // save info somewhere
-      if (!reload) {
-        window.alert('Hahahaaa')
-        return 'haha'
-      }
-    })
+    // $(window).on('beforeunload', function () {
+    //   // save info somewhere
+    //   if (!reload) {
+    //     window.alert('Hahahaaa')
+    //     return 'haha'
+    //   }
+    // })
     configEditor()
 
     $('#languageSelector').on('change', changeLanguage)
@@ -47,10 +47,7 @@
           langCode = 'PYTHON'
           break
       }
-      console.log('========================================')
-      console.log('language', language)
-      console.log('langCode', langCode)
-      console.log('========================================')
+
       reload = true
       window.location.href = '/lang/' + langCode + '/' + language + '?reload=true'
     }

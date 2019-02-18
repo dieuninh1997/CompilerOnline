@@ -4,8 +4,8 @@ const { listLanguague } = require('../../models/languages/languages')
 // home page
 homeRouter.get('/', function (req, res, next) {
   res.render('index.html', {
-    language: '1',
-    langCode: 'C',
+    language: '0',
+    langCode: '',
     listLanguague
   })
 })
