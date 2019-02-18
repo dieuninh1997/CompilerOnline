@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2-dev start index.js"
+    "start-dev": "pm2-dev start index.js",
+    "start": "node index.js",
+    "stop": "pm2 stop ./index.js"
   },
   "author": "",
   "license": "ISC",
