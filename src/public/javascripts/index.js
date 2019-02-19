@@ -57,7 +57,7 @@
 
     function configEditor () {
       var editor = ace.edit('editor')
-      editor.setTheme('ace/theme/monokai')
+      editor.setTheme('ace/theme/monokai')// iplastic
       editor.setFontSize(16)
       editor.setShowPrintMargin(false) // hide vertical line white in editor
 
