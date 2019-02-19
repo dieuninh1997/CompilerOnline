@@ -40,9 +40,13 @@
         console.log('========================================')
         console.log('data', respone)
         console.log('========================================')
-        $('#outputRespone').html(respone.data.run_status.output)
-        $('#outputRespone').append('<br>')
-        $('#outputRespone').append(respone.data.run_status.stderr)
+        if (respone.success) {
+          $('#outputRespone').html(respone.data.run_status.output)
+          $('#outputRespone').append('<br>')
+          $('#outputRespone').append(respone.data.run_status.stderr)
+        } else {
+          $('#outputRespone').html(respone.message)
+        }
       })
     })
   }
