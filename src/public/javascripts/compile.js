@@ -5,6 +5,8 @@
 
   function compileReady () {
     var compileButton = $('#compilerButton')
+    configEditor()
+
     compileButton.on('click', function () {
       var editor = ace.edit('editor')
 
@@ -37,9 +39,7 @@
         dataType: 'json',
         contentType: 'application/json'
       }).done(function (respone) {
-        console.log('========================================')
-        console.log('data', respone)
-        console.log('========================================')
+        window.location.href = '/compile/' + respone.data.shareUrl
         if (respone.success) {
           $('#outputRespone').html(respone.data.run_status.output)
           $('#outputRespone').append('<br>')
@@ -49,5 +49,19 @@
         }
       })
     })
+
+    function configEditor () {
+      var editor = ace.edit('editor')
+      editor.setTheme('ace/theme/monokai')// iplastic
+      editor.setFontSize(16)
+      editor.setShowPrintMargin(false) // hide vertical line white in editor
+      editor.setReadOnly(true) // disable editor
+
+      var langMode = $('.editer').data('langcode')
+      if (langMode === 'C' || langMode === 'CPP') langMode = 'c_cpp'
+      var mode = `ace/mode/${langMode.toLowerCase()}`
+      editor.session.setMode(mode) // default mode text, 'ace/mode/python'
+      editor.getSession().setUseWorker(false) // disable check syntax
+    }
   }
 })

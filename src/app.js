@@ -27,7 +27,7 @@ app.use(function (error, req, res, next) {
 
   // render the error page
   res.status(error.status || 500)
-  res.render('error.html')
+  res.render('error/error.html')
 })
 
 module.exports = app

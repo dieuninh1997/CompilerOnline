@@ -60,7 +60,7 @@
       editor.setTheme('ace/theme/monokai')// iplastic
       editor.setFontSize(16)
       editor.setShowPrintMargin(false) // hide vertical line white in editor
-
+      editor.setReadOnly(false) // disable editor
       var langMode = $('.editer').data('langcode')
       if (langMode === 'C' || langMode === 'CPP') langMode = 'c_cpp'
       var mode = `ace/mode/${langMode.toLowerCase()}`

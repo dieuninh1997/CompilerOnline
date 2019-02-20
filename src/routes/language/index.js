@@ -11,7 +11,7 @@ languageRouter.get('/:langCode/:language', function (req, res, next) {
       if (err) {
         return
       }
-      res.render('index.html', {
+      res.render('home/home.html', {
         language,
         langCode,
         listLanguague,

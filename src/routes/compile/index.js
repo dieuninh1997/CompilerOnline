@@ -6,7 +6,6 @@ const hackerEarthNew = new HackerEarth(
   'f1a9987351e5e961c13124c89d5d85ec52b69aa5', // Your Client Secret Key here this is mandatory
   '' // mode sync=1 or async(optional)=0 or null async is by default and preferred for nodeJS
 )
-
 /*
 language    langCode            Time Limit(s)          Memory Limit
     1           C                   1                   256MB=262144
@@ -67,22 +66,20 @@ compileRouter.post('/', async function (req, res, next) {
       input: input[0], // input against which you have to test your source code
       language: langCode // optional choose any one of them or none
     }
-    console.log('========================================')
-    console.log('config', config)
-    console.log('========================================')
 
     const resultCompile = await hackerEarthNew.compile(config)
     const resultCompileJSON = JSON.parse(resultCompile)
     if (resultCompileJSON.compile_status !== 'OK') {
       throw new Error(resultCompileJSON.compile_status)
     }
-    const resultRun = await hackerEarthNew.run(config)
-
+    let resultRun = await hackerEarthNew.run(config)
+    resultRun = JSON.parse(resultRun)
     res.json({
       success: true,
       message: 'resultRun success',
-      data: JSON.parse(resultRun)
+      data: resultRun
     })
+    // // ctrl alt N : run code in a file
   } catch (error) {
     res.json({
       success: false,
@@ -92,4 +89,18 @@ compileRouter.post('/', async function (req, res, next) {
   }
 })
 
+compileRouter.get('/:id', async function (req, res, next) {
+  try {
+    const { id } = req.params
+    const dataFromPastebin = await pastebin.getPaste(id)
+    console.log('========================================')
+    console.log('dataFromPastebin', JSON.parse(dataFromPastebin))
+    console.log('========================================')
+    res.render('compile/compile.html', {
+      dataFromPastebin
+    })
+  } catch (error) {
+    console.log('getDataFromPastebin', error)
+  }
+})
 module.exports = compileRouter
