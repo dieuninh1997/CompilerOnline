@@ -48,12 +48,9 @@
         dataType: 'json',
         contentType: 'application/json'
       }).done(function (respone) {
-        reload = true
-        window.location.href = '/compile/' + respone.data.code_id
         if (respone.success) {
-          $('#outputRespone').html(respone.data.run_status.output)
-          $('#outputRespone').append('<br>')
-          $('#outputRespone').append(respone.data.run_status.stderr)
+          reload = true
+          window.location.href = '/compile/' + respone.data.code_id
         } else {
           $('#outputRespone').html(respone.message)
         }

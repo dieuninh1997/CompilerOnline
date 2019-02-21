@@ -73,12 +73,9 @@ compileRouter.post('/', async function (req, res, next) {
     }
     let resultRun = await hackerEarthNew.run(config)
     resultRun = JSON.parse(resultRun)
-    console.log('========================================')
-    console.log('resultRun', resultRun)
-    console.log('========================================')
 
     // insert value to table
-    const a = await knex('compile').insert({
+    const resInsert = await knex('compile').insert({
       source_id: resultRun.code_id,
       source: source,
       input: input[0],
@@ -86,7 +83,7 @@ compileRouter.post('/', async function (req, res, next) {
       language: langCode
     })
     console.log('========================================')
-    console.log('a', a)
+    console.log('resInsert', resInsert)
     console.log('========================================')
 
     res.json({
@@ -97,7 +94,7 @@ compileRouter.post('/', async function (req, res, next) {
   } catch (error) {
     res.json({
       success: false,
-      message: 'Compile error',
+      message: error.message,
       data: error
     })
   }
