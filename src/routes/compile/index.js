@@ -6,19 +6,18 @@ const hackerEarthNew = new HackerEarth(
   'f1a9987351e5e961c13124c89d5d85ec52b69aa5', // Your Client Secret Key here this is mandatory
   '' // mode sync=1 or async(optional)=0 or null async is by default and preferred for nodeJS
 )
-/*
-language    langCode            Time Limit(s)          Memory Limit
-    1           C                   1                   256MB=262144
-    2           CPP CPP11           1
-    3           CSHARP              2
-    4           JAVA                2
-    5           JAVASCRIPT          1
-    6           PYTHON              5
-*/
+var knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host: 'localhost',
+    user: 'root',
+    password: '12345678',
+    database: 'compiler_online'
+  }
+})
 
 compileRouter.post('/', async function (req, res, next) {
   try {
-    // return res.json(req.body)
     const { source, input, language } = req.body
     let timeLimit = 1
     let memoryLimit = 0
@@ -74,16 +73,28 @@ compileRouter.post('/', async function (req, res, next) {
     }
     let resultRun = await hackerEarthNew.run(config)
     resultRun = JSON.parse(resultRun)
+
+    // insert value to table
+    const resInsert = await knex('compile').insert({
+      source_id: resultRun.code_id,
+      source: source,
+      input: input[0],
+      output: resultRun.run_status.output,
+      language: langCode
+    })
+    console.log('========================================')
+    console.log('resInsert', resInsert)
+    console.log('========================================')
+
     res.json({
       success: true,
       message: 'resultRun success',
       data: resultRun
     })
-    // // ctrl alt N : run code in a file
   } catch (error) {
     res.json({
       success: false,
-      message: 'Compile error',
+      message: error.message,
       data: error
     })
   }
@@ -92,12 +103,12 @@ compileRouter.post('/', async function (req, res, next) {
 compileRouter.get('/:id', async function (req, res, next) {
   try {
     const { id } = req.params
-    const dataFromPastebin = await pastebin.getPaste(id)
+    const compileInfo = await knex.select().from('compile').where('source_id', id)
     console.log('========================================')
-    console.log('dataFromPastebin', JSON.parse(dataFromPastebin))
+    console.log('compileInfo', compileInfo)
     console.log('========================================')
     res.render('compile/compile.html', {
-      dataFromPastebin
+      compileInfo: compileInfo[0]
     })
   } catch (error) {
     console.log('getDataFromPastebin', error)

@@ -13,7 +13,49 @@
         return 'haha'
       }
     })
+    var compileButton = $('#compilerButton')
     configEditor()
+
+    compileButton.on('click', function () {
+      var editor = ace.edit('editor')
+
+      if ($('.languageSelector').val() === '0') {
+        return window.alert('Please select a language')
+      }
+      if (editor.getValue() === '') {
+        return window.alert('Cannot compile empty source')
+      }
+
+      $('#outputRespone').text('')
+      $('#outputRespone').text('Compiling... Please wait')
+
+      var testCase = []
+      testCase[0] = $('#customInput').val()
+      if (!testCase.length) {
+        testCase.push(' ')
+      }
+
+      var config = {
+        source: editor.getValue(),
+        input: testCase,
+        language: $('#languageSelector').val()
+      }
+
+      $.ajax({
+        type: 'POST',
+        url: '/compile',
+        data: JSON.stringify(config),
+        dataType: 'json',
+        contentType: 'application/json'
+      }).done(function (respone) {
+        if (respone.success) {
+          reload = true
+          window.location.href = '/compile/' + respone.data.code_id
+        } else {
+          $('#outputRespone').html(respone.message)
+        }
+      })
+    })
 
     $('#languageSelector').on('change', changeLanguage)
     $('#chkInput').on('change', showHideDiv)
