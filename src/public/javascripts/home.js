@@ -50,7 +50,7 @@
       }).done(function (respone) {
         if (respone.success) {
           reload = true
-          window.location.href = '/compile/' + respone.data.code_id
+          window.location.href = '/compile/' + respone.data.source_id
         } else {
           $('#outputRespone').html(respone.message)
         }

@@ -1,84 +1,76 @@
 const express = require('express')
-
 const compileRouter = express.Router()
-const HackerEarth = require('hackerearth-node')
-const hackerEarthNew = new HackerEarth(
-  'f1a9987351e5e961c13124c89d5d85ec52b69aa5', // Your Client Secret Key here this is mandatory
-  '' // mode sync=1 or async(optional)=0 or null async is by default and preferred for nodeJS
-)
+const uuidv4 = require('uuid/v4')
+const axios = require('axios')
+
 const config = require('./../../config/config')
 var knex = require('knex')(config)
 
 compileRouter.post('/', async function (req, res, next) {
+  const JDOODLE_ENDPOINT = 'https://api.jdoodle.com/execute'
+  const JDOODLE_CLIENT_ID = '24c3feb96f3a0f6b5e90f7617974f8c9'
+  const JDOODLE_CLIENT_SECRET = 'ff58e78a49236cf16dc8606a9fad5834fa9e31b4cba431dfb9bd27e5ac91f599'
+
   try {
     const { source, input, language } = req.body
-    let timeLimit = 1
-    let memoryLimit = 0
-    let langCode = 'C'
+    let langCode = 'c'
     switch (language) {
       case '1':
-        langCode = 'C'
-        timeLimit = 1
-        memoryLimit = 262144
+        langCode = 'c'
         break
       case '2':
-        langCode = 'CPP'
-        timeLimit = 1
-        memoryLimit = 262144
+        langCode = 'cpp'
         break
 
       case '3':
-        timeLimit = 2
-        memoryLimit = 262144
-        langCode = 'CSHARP'
+        langCode = 'csharp'
         break
       case '4':
-        timeLimit = 2
-        memoryLimit = 262144
-        langCode = 'JAVA'
+        langCode = 'java'
         break
       case '5':
-        timeLimit = 1
-        memoryLimit = 262144
-        langCode = 'JAVASCRIPT'
+        langCode = 'javascript'
         break
       case '6':
-        timeLimit = 5
-        memoryLimit = 262144
-        langCode = 'PYTHON'
+        langCode = 'python3'
         break
       default:
-        memoryLimit = 262144
         break
     }
-    const config = {
-      time_limit: parseInt(timeLimit) || 1, // your time limit in integer
-      memory_limit: parseInt(memoryLimit) || 262144, // your memory limit in integer
-      source: source, // your source code for which you want to use hackerEarth api
-      input: input[0], // input against which you have to test your source code
-      language: langCode // optional choose any one of them or none
+
+    const program = {
+      script: source,
+      stdin: input[0],
+      language: langCode.toLowerCase(),
+      versionIndex: '0',
+      clientId: JDOODLE_CLIENT_ID,
+      clientSecret: JDOODLE_CLIENT_SECRET
     }
 
-    const resultCompile = await hackerEarthNew.compile(config)
-    const resultCompileJSON = JSON.parse(resultCompile)
-    if (resultCompileJSON.compile_status !== 'OK') {
-      throw new Error(resultCompileJSON.compile_status)
-    }
-    let resultRun = await hackerEarthNew.run(config)
-    resultRun = JSON.parse(resultRun)
+    console.log('========================================')
+    console.log('program', program)
+    console.log('========================================')
 
-    // insert value to table
-    const resInsert = await knex('compile').insert({
-      source_id: resultRun.code_id,
+    const compileRequest = await axios.post(JDOODLE_ENDPOINT, program)
+    console.log('========================================')
+    console.log('compileRequest', compileRequest.data)
+    console.log('========================================')
+
+    const sourceID = uuidv4()
+    const itemInsert = {
+      source_id: sourceID,
       source: source,
       input: input[0],
-      output: resultRun.run_status.output,
+      output: compileRequest.data.output,
       language: langCode
-    })
-    console.log('========================================')
-    console.log('resInsert', resInsert)
-    console.log('========================================')
+    }
+    // insert value to table
+    await knex('compile').insert(itemInsert)
 
+    const resultRun = Object.assign({}, compileRequest.data, itemInsert)
+    console.log('========================================')
+    console.log('resultRun', resultRun)
+    console.log('========================================')
     res.json({
       success: true,
       message: 'resultRun success',
@@ -87,7 +79,7 @@ compileRouter.post('/', async function (req, res, next) {
   } catch (error) {
     res.json({
       success: false,
-      message: error.message,
+      message: 'Compile error!',
       data: error
     })
   }
