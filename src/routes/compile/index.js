@@ -6,15 +6,8 @@ const hackerEarthNew = new HackerEarth(
   'f1a9987351e5e961c13124c89d5d85ec52b69aa5', // Your Client Secret Key here this is mandatory
   '' // mode sync=1 or async(optional)=0 or null async is by default and preferred for nodeJS
 )
-var knex = require('knex')({
-  client: 'mysql',
-  connection: {
-    host: 'localhost',
-    user: 'root',
-    password: '12345678',
-    database: 'compiler_online'
-  }
-})
+const config = require('./../../config/config')
+var knex = require('knex')(config)
 
 compileRouter.post('/', async function (req, res, next) {
   try {

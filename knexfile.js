@@ -1,35 +1,11 @@
 // Update with your config settings.
-
+const config = require('./src/config/config')
 module.exports = {
 
-  development: {
-    client: 'mysql',
-    connection: {
-      host: 'localhost',
-      user: 'root',
-      password: '12345678',
-      database: 'compiler_online'
-    }
-  },
+  development: config,
 
-  staging: {
-    client: 'mysql',
-    connection: {
-      host: 'localhost',
-      user: 'root',
-      password: '12345678',
-      database: 'compiler_online'
-    }
-  },
+  staging: config,
 
-  production: {
-    client: 'mysql',
-    connection: {
-      host: 'localhost',
-      user: 'root',
-      password: '12345678',
-      database: 'compiler_online'
-    }
-  }
+  production: config
 
 }
