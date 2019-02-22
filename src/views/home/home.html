@@ -3,7 +3,7 @@
  <div class="editer" data-langcode={{langCode}}>
       <div id="editor">{{data}}</div>
     </div>
-    <div class="control">
+    <div class="control bg-dark">
       <div class="languageOption">
         <select id="languageSelector" required data-listlanguague={{listLanguague}}>
           {% for item in listLanguague %}
@@ -16,7 +16,7 @@
         </select>
       </div>
       <div class="compileRun">
-        <label for="chkInput">
+        <label for="chkInput" style="color: white">
           <input type="checkbox" id="chkInput" checked/>
           Custom input
         </label>

@@ -6,8 +6,27 @@
   {% block head %}{% endblock %}
 </head>
 <body>
-  <div class="container" >
-    {% block content %}{% endblock %}
+  <div>
+    <nav class="navbar navbar-light bg-secondary">
+      <a class="navbar-brand" href="#">
+        <img 
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAY1BMVEX///8BAQEAAAChoaGSkpK/v79zc3Pm5uZhYWHr6+va2tq8vLxISEhVVVX09PSenp5qamqtra3FxcXQ0NCLi4sXFxcoKCiCgoJubm4gICBOTk5dXV3g4OB9fX0/Pz8vLy8ODg7RfqWyAAADz0lEQVR4nO3d61LbQBCEUWm52QZ8JSFcArz/U0ZQVEilAM9od7pnq/r7j6xjGwnY8TIMSimllFJKKaWUUkoppZRSSiml1BetNg93ZUbj88PNnn3yhjbjHN1H2xVb8H2719eipunrr5dsxTfdV/rekTu246uWYwPfG/E3m/J5yxYv4LvxnI35rIbAnMSmwIzExsB8xObAbMQAYC5iCDATMQiYhxgGzEIMBOYghgIzEIOBfGI4kE0EALlECJBJBAF5RBiQRQQCOUQokEEEA/FEOBBNJACxRAoQSSQBcUQaEEUkAjHENRM4EeP/4P9MBU7E6GWbGxfQvDjqOWTs4tuF72zulxeGDr6DXoUKFyHnsvIRD4FA13XU8WS7iOUhULiJAfqIpazDgMOT4zx83y4u4mUQb8p+Gu7rgYMYeE98jAN6iIFX033oOZiJ5aU17G9n1lOY9yRbiaU0dn1kFM5+FxmJdGHFt4mNyBZWXQdMRLKw8kJnIXKF1VdyA5EqbHCrOk5kCstTg0c5pBZuGzzKWkIJKzoubPGLzXVmYQviUSD7flhLPA6k/0xTRzQA2cI6ogVIF9YQTUC+cD7RBkwgnEs0AjMI5xGtwLE8t6e9ZxbOIZqBY1lE4N6yC/1EO3Asmxje4BJ6iQ7gWOI+wOcR+ogu4EsY0Cf0ED3AyDepU2gn+oBx9wq3cDqZhSXHitYYvJDvFVrX8V2HDF3kdgvbF7o8mkEYPYlBF5ZyEQqkC8OBbGE8kCwEALlCBJAqhACZQgyQKAQBeUIUkCaEAVlCHJAkBAI5QiSQIoQCGUIskCAEA/FCNBAuhAPRQjwQLCQAsUIGECqkAJFCDhAoJAFxQhYQJqQBQcJSftJ2MLVM7tU+CdMRblk+y/Tlr/2dd7nsP15ZsN6hNuF2GA63P5xbB//T1Ya7xa51Rni92p/N6PBI1b2GmYJmZpiCTr5X9bEs19K+iaYp6K6JtinononGKeiOidYp6H6J5inobon2KeheiUc/N9c9cemYgu6U6NjZoVPi1jPo3SXRN+jdJdG1U06XxBPfvHKPROe+XKdNggqd+3K1CSocTgnrwFjhcI5fCAYL4US8EE0kCMFEhhBLpAihRI4QSSQJgUSWEEekCWFEnhBFJApBRKYQQ6QKIUSuEEEkCwFEtjCeSBeGE/nCaGICYTAxgzCWmEIYSswhjCQmEQYSswjjiGmEYcQ8wokYYkwkHG5CiJmEw75iPrgP4dvL2Pz/yOcSDsPuvtGqIWv90NLqcnfSMrZHKaWUUkoppZRSSimllFJKKaWUUsrcH0paTZcNvDRVAAAAAElFTkSuQmCC" 
+          width="30" height="30" class="d-inline-block align-top" alt="">
+        z Compiler
+      </a>
+      <div class="navbar navbar-default"> 
+        <a class="nav-item nav-link active" href="#">
+          New code 
+          <span class="sr-only">(current)</span>
+        </a>
+        <a class="nav-item nav-link" href="#">
+          About</a>
+      </div>
+    </nav>
+        
+    <div class="container" >
+      {% block content %}{% endblock %}
+    </div>
   </div>
   {% include "layout/script.html" %}
 
