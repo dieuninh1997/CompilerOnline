@@ -6,10 +6,10 @@ const config = {
   dev: {
     client: 'mysql',
     connection: {
-      host: process.env.DB_HOST || 'us-cdbr-iron-east-03.cleardb.net',
-      user: process.env.DB_USER || 'b1bb7fa5c67f98',
-      password: process.env.DB_PASSWORD || '5751a765',
-      database: process.env.DB_DATABASE || 'heroku_196001fc5bcd2d1'
+      host: process.env.DB_HOST || 'localhost',
+      user: process.env.DB_USER || 'root',
+      password: process.env.DB_PASSWORD || '12345678',
+      database: process.env.DB_DATABASE || 'compiler_online'
     }
   },
   product: {

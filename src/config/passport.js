@@ -3,8 +3,13 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 
 passport.use(new LocalStrategy({
-  usernameField: 'user[email]',
-  passwordField: 'user[password]'
+  usernameField: 'email',
+  passwordField: 'password'
 }, (email, password, done) => {
-
+  console.log('========================================')
+  console.log('hihih', { email, password })
+  console.log('========================================')
+  return done(null, { email, password })
 }))
+
+module.exports = passport

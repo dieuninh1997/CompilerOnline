@@ -2,8 +2,7 @@ var express = require('express')
 var app = express()
 var path = require('path')
 var bodyParser = require('body-parser')
-var { homeRouter, languageRouter, compileRouter, aboutRouter, loginRouter } = require('./routes')
-require('./config/passport')
+var { homeRouter, languageRouter, compileRouter, aboutRouter, authRouter } = require('./routes')
 
 initViewEngine()
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -14,7 +13,7 @@ app.use('/', homeRouter)
 app.use('/lang', languageRouter)
 app.use('/compile', compileRouter)
 app.use('/about', aboutRouter)
-app.use('/login', loginRouter)
+app.use('/auth', authRouter)
 
 // ham nay de handle nhung thuoc tinh bat buoc co trong trong request, vi du nhu token trong header, cookie,.v.v.v.
 app.use(function (req, res, next) {
