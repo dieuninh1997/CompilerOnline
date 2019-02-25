@@ -1,9 +1,9 @@
-const express = require('express')
+var express = require('express')
+var app = express()
+var path = require('path')
 var bodyParser = require('body-parser')
-
-const app = express()
-const path = require('path')
-const { homeRouter, languageRouter, compileRouter, aboutRouter, loginRouter } = require('./routes')
+var { homeRouter, languageRouter, compileRouter, aboutRouter, loginRouter } = require('./routes')
+require('./config/passport')
 
 initViewEngine()
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -35,7 +35,7 @@ app.use(function (error, req, res, next) {
 module.exports = app
 
 function initViewEngine () {
-  const nunjucks = require('nunjucks')
+  var nunjucks = require('nunjucks')
   nunjucks.configure(path.resolve(__dirname, './views'), {
     autoescape: true,
     express: app

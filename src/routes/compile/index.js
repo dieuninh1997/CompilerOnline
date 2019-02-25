@@ -3,8 +3,7 @@ const compileRouter = express.Router()
 const uuidv4 = require('uuid/v4')
 const axios = require('axios')
 
-const config = require('./../../config/config')
-var knex = require('knex')(config)
+const knex = require('./../../knex')
 
 compileRouter.post('/', async function (req, res, next) {
   const JDOODLE_ENDPOINT = 'https://api.jdoodle.com/execute'
