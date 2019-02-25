@@ -3,6 +3,8 @@
 })(function cbFn ($, window, ace) {
   $(homePageReady)
   function homePageReady () {
+    $('select').formSelect()
+    $('.sidenav').sidenav()
     var language = '1'
     var langCode = 'C'
     var reload = false

@@ -13,17 +13,16 @@
 
 .editer {
     position: relative;
-    width: 65%;
+    width: 100%;
     float: left;
-    min-height: 635px;
+    min-height: 645px;
     height: 100%;
     background: grey;
 }
 
 .control{
     float: left;
-    width: 35%;
-    background: #cfd0ca;
+    width: 100%;
     min-height: 635px;
 }
 
@@ -89,4 +88,17 @@
   
 .navbar a{
     color: black
+}
+
+.nav-container{
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.editer-container {
+    padding: 0 !important;
+}
+
+.input-container {
+    padding: 0 !important;
 }

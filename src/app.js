@@ -3,7 +3,7 @@ var bodyParser = require('body-parser')
 
 const app = express()
 const path = require('path')
-const { homeRouter, languageRouter, compileRouter, aboutRouter } = require('./routes')
+const { homeRouter, languageRouter, compileRouter, aboutRouter, loginRouter } = require('./routes')
 
 initViewEngine()
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -14,6 +14,7 @@ app.use('/', homeRouter)
 app.use('/lang', languageRouter)
 app.use('/compile', compileRouter)
 app.use('/about', aboutRouter)
+app.use('/login', loginRouter)
 
 // ham nay de handle nhung thuoc tinh bat buoc co trong trong request, vi du nhu token trong header, cookie,.v.v.v.
 app.use(function (req, res, next) {
