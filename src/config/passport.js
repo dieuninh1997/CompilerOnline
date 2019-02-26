@@ -4,7 +4,8 @@ const LocalStrategy = require('passport-local')
 
 passport.use(new LocalStrategy({
   usernameField: 'email',
-  passwordField: 'password'
+  passwordField: 'password',
+  session: false
 }, (email, password, done) => {
   console.log('========================================')
   console.log('hihih', { email, password })
