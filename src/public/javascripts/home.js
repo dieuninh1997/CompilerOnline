@@ -3,16 +3,18 @@
 })(function cbFn ($, window, ace) {
   $(homePageReady)
   function homePageReady () {
+    $('select').formSelect()
+    $('.sidenav').sidenav()
     var language = '1'
     var langCode = 'C'
     var reload = false
-    $(window).on('beforeunload', function () {
-      // save info somewhere
-      if (!reload) {
-        window.alert('Hahahaaa')
-        return 'haha'
-      }
-    })
+    // $(window).on('beforeunload', function () {
+    //   // save info somewhere
+    //   if (!reload) {
+    //     window.alert('Hahahaaa')
+    //     return 'haha'
+    //   }
+    // })
     var compileButton = $('#compilerButton')
     configEditor()
 

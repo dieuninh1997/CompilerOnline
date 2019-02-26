@@ -3,8 +3,7 @@ const compileRouter = express.Router()
 const uuidv4 = require('uuid/v4')
 const axios = require('axios')
 
-const config = require('./../../config/config')
-var knex = require('knex')(config)
+const knex = require('./../../knex')
 
 compileRouter.post('/', async function (req, res, next) {
   const JDOODLE_ENDPOINT = 'https://api.jdoodle.com/execute'
@@ -47,14 +46,7 @@ compileRouter.post('/', async function (req, res, next) {
       clientSecret: JDOODLE_CLIENT_SECRET
     }
 
-    console.log('========================================')
-    console.log('program', program)
-    console.log('========================================')
-
     const compileRequest = await axios.post(JDOODLE_ENDPOINT, program)
-    console.log('========================================')
-    console.log('compileRequest', compileRequest.data)
-    console.log('========================================')
 
     const sourceID = uuidv4()
     const itemInsert = {
@@ -68,9 +60,7 @@ compileRouter.post('/', async function (req, res, next) {
     await knex('compile').insert(itemInsert)
 
     const resultRun = Object.assign({}, compileRequest.data, itemInsert)
-    console.log('========================================')
-    console.log('resultRun', resultRun)
-    console.log('========================================')
+
     res.json({
       success: true,
       message: 'resultRun success',
@@ -89,9 +79,7 @@ compileRouter.get('/:id', async function (req, res, next) {
   try {
     const { id } = req.params
     const compileInfo = await knex.select().from('compile').where('source_id', id)
-    console.log('========================================')
-    console.log('compileInfo', compileInfo)
-    console.log('========================================')
+
     res.render('compile/compile.html', {
       compileInfo: compileInfo[0]
     })

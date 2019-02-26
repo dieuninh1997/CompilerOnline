@@ -1,27 +1,33 @@
 {% extends "layout/layout.html" %}
 {% block content %}
- <div class="editer" data-langcode={{compileInfo.language}}>
+<div class="row">
+  <div class="col s12 l8 editer-container">
+    <div class="editer" data-langcode={{compileInfo.language}}>
       <div id="editor">{{compileInfo.source}}</div>
     </div>
-    <div class="control">
-      <div class="languageOption">
-        <label>Language: {{compileInfo.language}}</label>
-        <label>Date: {{compileInfo.created_at}}</label>
-      </div>
-      <div class="compileRun">
-        <div id="dvInput">
-          <label>Input</label>
-          <textarea id="customInput" disabled placeholder="Empty">{{compileInfo.input}}</textarea>
-        </div>
-      </div>
-
-      <div class="compileRun output">
-        <div class="runRespone">
-          <label>Output</label>
-          <textarea id="outputRespone" disabled>{{compileInfo.output}}</textarea>
-        </div>
+  </div>
+  <div class="col s12 l4 input-container control">
+    <div class="languageOption">
+      <label class="col s12">Language: {{compileInfo.language}}</label>
+      <label class="col s12">Date: {{compileInfo.created_at}}</label>
+    </div>
+    <div class="compileRun">
+      <div id="dvInput">
+        <label>Input</label>
+        <textarea id="customInput" disabled placeholder="Empty">{{compileInfo.input}}</textarea>
       </div>
     </div>
+
+    <div class="compileRun output">
+      <div class="runRespone">
+        <label>Output</label>
+        <textarea id="outputRespone" disabled>{{compileInfo.output}}</textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
 {% endblock %}
 {% block script %}
 <script src="/javascripts/compile.js" type="text/javascript"></script>

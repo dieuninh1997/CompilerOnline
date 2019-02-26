@@ -1,9 +1,8 @@
-const express = require('express')
+var express = require('express')
+var app = express()
+var path = require('path')
 var bodyParser = require('body-parser')
-
-const app = express()
-const path = require('path')
-const { homeRouter, languageRouter, compileRouter, aboutRouter } = require('./routes')
+var { homeRouter, languageRouter, compileRouter, aboutRouter, authRouter } = require('./routes')
 
 initViewEngine()
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -14,6 +13,7 @@ app.use('/', homeRouter)
 app.use('/lang', languageRouter)
 app.use('/compile', compileRouter)
 app.use('/about', aboutRouter)
+app.use('/auth', authRouter)
 
 // ham nay de handle nhung thuoc tinh bat buoc co trong trong request, vi du nhu token trong header, cookie,.v.v.v.
 app.use(function (req, res, next) {
@@ -34,7 +34,7 @@ app.use(function (error, req, res, next) {
 module.exports = app
 
 function initViewEngine () {
-  const nunjucks = require('nunjucks')
+  var nunjucks = require('nunjucks')
   nunjucks.configure(path.resolve(__dirname, './views'), {
     autoescape: true,
     express: app
