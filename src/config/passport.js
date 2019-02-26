@@ -6,11 +6,19 @@ passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   session: false
-}, (email, password, done) => {
-  console.log('========================================')
-  console.log('hihih', { email, password })
-  console.log('========================================')
-  return done(null, { email, password })
+}, async (email, password, done) => {
+  const user = await knex('users').select().where('email', email).first()
+  if (!user) {
+    return done(null, false, { message: 'Email not found' })
+  }
+  if (!validatePassword(user, password)) {
+    return done(null, false, { message: 'Incorrect password' })
+  }
+  return done(null, user)
 }))
+
+const validatePassword = (userFromDb, password) => {
+  return userFromDb.password === password
+}
 
 module.exports = passport

@@ -4,9 +4,10 @@ const passport = require('../../config/passport')
 const knex = require('../../knex')
 
 // login page
-authRouter.post('/login', passport.authenticate('local', { failureRedirect: '/auth/login' }),
+authRouter.post('/login', passport.authenticate('local', { session: false, failureRedirect: '/auth/login' }),
   function (req, res, next) {
-    res.redirect('/')
+    res.json(req.user)
+    // res.redirect('/')
   }
 )
 
