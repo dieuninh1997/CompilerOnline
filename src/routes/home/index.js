@@ -6,7 +6,8 @@ homeRouter.get('/', function (req, res, next) {
   res.render('home/home.html', {
     language: '0',
     langCode: '',
-    listLanguague
+    listLanguague,
+    webTitle: 'Ez Compiler'
   })
 })
 

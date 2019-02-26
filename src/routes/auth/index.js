@@ -12,7 +12,9 @@ authRouter.post('/login', passport.authenticate('local', { failureRedirect: '/au
 
 authRouter.get('/login', (req, res, next) => {
   try {
-    res.render('auth/login.html')
+    res.render('auth/login.html', {
+      webTitle: 'Login'
+    })
   } catch (error) {
 
   }
@@ -20,7 +22,9 @@ authRouter.get('/login', (req, res, next) => {
 
 authRouter.get('/register', (req, res, next) => {
   try {
-    res.render('auth/register.html')
+    res.render('auth/register.html', {
+      webTitle: 'Register'
+    })
   } catch (error) {
 
   }
