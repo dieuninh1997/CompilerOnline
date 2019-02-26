@@ -2,10 +2,9 @@ const knex = require('./../knex')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 
-passport.use(new LocalStrategy({
+const localStrategy = new LocalStrategy({
   usernameField: 'email',
-  passwordField: 'password',
-  session: false
+  passwordField: 'password'
 }, async (email, password, done) => {
   const user = await knex('users').select().where('email', email).first()
   if (!user) {
@@ -15,7 +14,20 @@ passport.use(new LocalStrategy({
     return done(null, false, { message: 'Incorrect password' })
   }
   return done(null, user)
-}))
+})
+
+const serializeUser = (user, done) => {
+  return done(null, user.email)
+}
+
+const deserializeUser = async (email, done) => {
+  const userInfo = await knex('users').select().where('email', email).first()
+  return done(null, userInfo)
+}
+
+passport.use(localStrategy)
+passport.serializeUser(serializeUser)
+passport.deserializeUser(deserializeUser)
 
 const validatePassword = (userFromDb, password) => {
   return userFromDb.password === password

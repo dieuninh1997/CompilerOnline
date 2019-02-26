@@ -3,13 +3,14 @@ const authRouter = express.Router()
 const passport = require('../../config/passport')
 const knex = require('../../knex')
 
-// login page
-authRouter.post('/login', passport.authenticate('local', { session: false, failureRedirect: '/auth/login' }),
-  function (req, res, next) {
-    res.json(req.user)
-    // res.redirect('/')
-  }
-)
+authRouter.get('/logout', (req, res, next) => {
+  req.logout()
+  res.redirect('/')
+})
+
+authRouter.post('/login', passport.authenticate('local', { failureRedirect: '/auth/register' }), (req, res, next) => {
+  res.redirect('/account')
+})
 
 authRouter.get('/login', (req, res, next) => {
   try {
@@ -17,7 +18,6 @@ authRouter.get('/login', (req, res, next) => {
       webTitle: 'Login'
     })
   } catch (error) {
-
   }
 })
 
@@ -58,4 +58,5 @@ authRouter.post('/register', async (req, res, next) => {
     })
   }
 })
+
 module.exports = authRouter

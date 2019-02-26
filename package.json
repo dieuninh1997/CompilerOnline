@@ -19,6 +19,8 @@
     "dotenv": "6.2.0",
     "express": "*",
     "express-es6-template-engine": "*",
+    "express-jwt": "5.3.1",
+    "express-session": "1.15.6",
     "hackerearth-node": "^2.3.9",
     "jsonwebtoken": "8.5.0",
     "knex": "0.16.3",

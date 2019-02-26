@@ -10,15 +10,28 @@
     <ul class="right hide-on-med-and-down">
       <li><a href="/">New code</a></li>
       <li><a href="/about">About</a></li>
+      {% if isLogin %}
+      <li><a href="/auth/codes">My codes</a></li>
+      <li><a href="/account">My account</a></li>
+      <li><a href="/auth/logout">Logout</a></li>
+      {% else %}
       <li><a href="/auth/login">Login</a></li>
       <li><a href="/auth/register">Register</a></li>
+      
+      {% endif %}
     </ul>
   </div>
 
   <ul class="sidenav" id="mobile-demo">
     <li><a href="/">New code</a></li>
     <li><a href="/about">About</a></li>
-    <li><a href="/auth/login">Login</a></li>
-    <li><a href="/auth/register">Register</a></li>
+    {% if isLogin %}
+      <li><a href="/auth/codes">My codes</a></li>
+      <li><a href="/account">My account</a></li>
+      <li><a href="/auth/logout">Logout</a></li>
+      {% else %}
+      <li><a href="/auth/login">Login</a></li>
+      <li><a href="/auth/register">Register</a></li>
+      {% endif %}
   </ul>
 </nav>
