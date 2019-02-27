@@ -23,7 +23,7 @@ app
   .use('/compile', compileRouter)
   .use('/about', aboutRouter)
   .use('/auth', authRouter)
-  .use('/account', accountRouter)
+  .use('/profile', accountRouter)
   .use(handleError)
 
 module.exports = app
@@ -47,5 +47,5 @@ function handleError (error, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? error : {}
 
   res.status(error.status || 500)
-  res.render('error/error.html')
+  res.render('error/error.html', { error })
 }
