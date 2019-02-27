@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "pm2-dev start index.js",
-    "start": "node index.js",
+    "start": "FACEBOOK_APP_ID=420294915442579 FACEBOOK_APP_SECRET=e604023512d18d0841ff7d2d0297de6b GOOGLE_CLIENT_ID=886437338838-pq6jnsroqeiqdt0ts9ci4bppip2d8qip.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=JlU6kVnwBZI-bW8WFhuGgBPK WEB_URL=https://ezcompiler.herokuapp.com node index.js",
     "stop": "pm2 stop ./index.js"
   },
   "author": "",
@@ -32,6 +32,7 @@
     "passport-facebook": "3.0.0",
     "passport-google": "0.3.0",
     "passport-google-oauth": "1.0.0",
+    "passport-google-oauth20": "1.0.0",
     "passport-local": "1.0.0",
     "pastebin-js": "0.6.0",
     "pm2": "3.2.9",
@@ -43,6 +44,7 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "https": "1.0.0"
   }
 }

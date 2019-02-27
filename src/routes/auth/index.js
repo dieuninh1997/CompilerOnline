@@ -3,13 +3,31 @@ const authRouter = express.Router()
 const passport = require('../../config/passport')
 const knex = require('../../knex')
 
+// face
+authRouter.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
+
+authRouter.get('/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/auth/login' }), (req, res, next) => {
+    res.redirect('/profile')
+  })
+
+// google
+authRouter.get('/google',
+  passport.authenticate('google', { scope: ['profile'] }))
+
+authRouter.get('/google/callback',
+  passport.authenticate('google', { failureRedirect: '/auth/login' }),
+  function (req, res, next) {
+    res.redirect('/profile')
+  })
+
 authRouter.get('/logout', (req, res, next) => {
   req.logout()
   res.redirect('/')
 })
 
 authRouter.post('/login', passport.authenticate('local', { failureRedirect: '/auth/register' }), (req, res, next) => {
-  res.redirect('/account')
+  res.redirect('/profile')
 })
 
 authRouter.get('/login', (req, res, next) => {

@@ -11,7 +11,7 @@
     <div class="input-field col s12 ">
       <select id="languageSelector" required data-listlanguague={{listLanguague}}>
         {% for item in listLanguague %}
-        <option value="{{item.language}}" {% if (item.language = language) %} selected {% endif %}>{{item.langCode}}
+        <option value="{{item.language}}" {% if (item.language == language) %} selected {% endif %}>{{item.langCode}}
         </option>
         {% endfor %}
       </select>
