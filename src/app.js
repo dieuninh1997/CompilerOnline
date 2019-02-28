@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const expressSession = require('express-session')
 
-const { homeRouter, languageRouter, compileRouter, aboutRouter, authRouter, accountRouter } = require('./routes')
+const { homeRouter, languageRouter, compileRouter, aboutRouter, authRouter, accountRouter, codesRouter } = require('./routes')
 const passport = require('./config/passport')
 
 const app = express()
@@ -24,6 +24,7 @@ app
   .use('/about', aboutRouter)
   .use('/auth', authRouter)
   .use('/profile', accountRouter)
+  .use('/codes', codesRouter)
   .use(handleError)
 
 module.exports = app

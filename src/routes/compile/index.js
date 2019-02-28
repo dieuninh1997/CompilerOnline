@@ -9,7 +9,7 @@ compileRouter.post('/', async function (req, res, next) {
   const JDOODLE_ENDPOINT = 'https://api.jdoodle.com/execute'
   const JDOODLE_CLIENT_ID = '24c3feb96f3a0f6b5e90f7617974f8c9'
   const JDOODLE_CLIENT_SECRET = 'ff58e78a49236cf16dc8606a9fad5834fa9e31b4cba431dfb9bd27e5ac91f599'
-
+  const userId = req.user ? req.user.id : null
   try {
     const { source, input, language } = req.body
     let langCode = 'c'
@@ -49,13 +49,22 @@ compileRouter.post('/', async function (req, res, next) {
     const compileRequest = await axios.post(JDOODLE_ENDPOINT, program)
 
     const sourceID = uuidv4()
-    const itemInsert = {
+    const itemInsertWithoutUserId = {
       source_id: sourceID,
       source: source,
       input: input[0],
       output: compileRequest.data.output,
       language: langCode
     }
+    const itemInsertWithUserId = {
+      source_id: sourceID,
+      source: source,
+      input: input[0],
+      output: compileRequest.data.output,
+      language: langCode,
+      user_id: userId
+    }
+    const itemInsert = userId ? itemInsertWithUserId : itemInsertWithoutUserId
     // insert value to table
     await knex('compile').insert(itemInsert)
 

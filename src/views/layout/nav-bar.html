@@ -17,11 +17,11 @@
       <li><a href="/">New code</a></li>
       <li><a href="/about">About</a></li>
       {% if isLogin %}
-      <li><a href="/auth/codes">My codes</a></li>
+      <li><a href="/codes">My codes</a></li>
       <li><a href="/profile">My profile</a></li>
       <li><a href="/auth/logout">Logout</a></li>
       {% else %}
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Login<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Login<i class="material-icons right">arrow_drop_down</i></a></li>
       <li><a href="/auth/register">Register</a></li>
       
       {% endif %}
@@ -32,7 +32,7 @@
     <li><a href="/">New code</a></li>
     <li><a href="/about">About</a></li>
     {% if isLogin %}
-      <li><a href="/auth/codes">My codes</a></li>
+      <li><a href="/codes">My codes</a></li>
       <li><a href="/profile">My profile</a></li>
       <li><a href="/auth/logout">Logout</a></li>
       {% else %}

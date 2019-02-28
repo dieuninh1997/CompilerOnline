@@ -63,11 +63,12 @@ authRouter.post('/register', async (req, res, next) => {
       throw new Error('Email existed')
     }
     await knex('users').insert(itemInsert)
-    res.json({
-      success: true,
-      message: 'register success',
-      data: itemInsert
-    })
+    // res.json({
+    //   success: true,
+    //   message: 'register success',
+    //   data: itemInsert
+    // })
+    res.redirect('/auth/login')
   } catch (error) {
     res.json({
       success: false,

@@ -5,7 +5,6 @@
   function homePageReady () {
     $('select').formSelect()
     $('.sidenav').sidenav()
-    $('.dropdown-trigger').dropdown()
     var language = '1'
     var langCode = 'C'
     var reload = false

@@ -4,6 +4,7 @@ const compileRouter = require('./compile')
 const aboutRouter = require('./about')
 const authRouter = require('./auth')
 const accountRouter = require('./profile')
+const codesRouter = require('./codes')
 
 module.exports = {
   compileRouter,
@@ -11,5 +12,6 @@ module.exports = {
   homeRouter,
   aboutRouter,
   authRouter,
-  accountRouter
+  accountRouter,
+  codesRouter
 }
