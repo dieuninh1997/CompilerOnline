@@ -58,16 +58,14 @@ authRouter.post('/register', async (req, res, next) => {
       email,
       password
     }
+    if (!name || !email || !password) {
+      throw new Error('Empty field')
+    }
     const user = await knex.select().from('users').where('email', email)
     if (user && user.length) {
       throw new Error('Email existed')
     }
     await knex('users').insert(itemInsert)
-    // res.json({
-    //   success: true,
-    //   message: 'register success',
-    //   data: itemInsert
-    // })
     res.redirect('/auth/login')
   } catch (error) {
     res.json({

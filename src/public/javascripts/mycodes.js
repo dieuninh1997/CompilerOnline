@@ -8,9 +8,6 @@
 
     itemCode.on('click', function () {
       var sourceId = $('#source_id').text()
-      console.log('========================================')
-      console.log('sourceId', sourceId)
-      console.log('========================================')
       window.location.href = '/compile/' + sourceId
     })
   }
