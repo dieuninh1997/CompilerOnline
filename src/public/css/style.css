@@ -153,6 +153,9 @@ form{
 .pull-left{
     float: left;
 }
+.pull-right{
+    float: right;
+}
 
 .btn-group{
     position: relative;

@@ -102,23 +102,36 @@
     <div class="col s9">
       <br>
       <div id="myrecent_action_box">
-        <div class="pull-left">
+        <div class="pull-left" hidden>
           <div class="btn-group" title="select">
             <button class="btn" href="#" id="select_all">all</button>
             <button class="btn" id="select_none">none</button>
           </div>
-          <a id="delete_button" href="#" class="btn" title="delete">
+          <a id="delete_button" href="#" class="btn" title="delete" disabled>
             <i class="material-icons delete">delete</i>
           </a>
         </div>
+        <div class="pull-right">
+          <button class="btn" id="btn_prev">
+            prev
+          </button>
+          <div class="btn-group">
+            <button class="btn disabled" id="page">
+              1
+            </button>
+          </div>
+          <button class="btn" id="btn_next">
+            next
+          </button>
+        </div>
       </div>
       <br>
-      <div id="myrecent">
+      <div class="myrecent" data-mycodes={{data}}>
         {% for item in data %}
         <div class="row"  style="border-bottom: 1px solid #e5e5e5;">
           <div class="col s2" >
               <label>
-                <input type="checkbox" class="filled-in" name="check_item"/>
+                <input type="checkbox" class="filled-in" name="delete_item" value={{item.source_id}}/>
                 <span> {{item.language}}</span>
               </label>
           </div>
